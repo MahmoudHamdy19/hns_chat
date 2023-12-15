@@ -1,8 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hns_chat/app/utils/localization/App_locate.dart';
 import 'package:hns_chat/app/utils/routes/app_routes.dart';
+import 'package:hns_chat/ui/splash_screen/binding/init_binding.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -15,11 +24,14 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         useMaterial3: true,
       ),
+      translations: AppLanguage(),
+      locale:const Locale('en','Us'),
       getPages:AppRoutes.pages,
-      initialRoute: AppRoutes.initRoute,
+      initialBinding: InitBinding(),
+      initialRoute: AppRoutes.registerScreen,
     );
   }
 }

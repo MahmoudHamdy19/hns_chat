@@ -1,26 +1,26 @@
 class User {
-  final String id;
-  final String userName;
-  final String email;
-  final String phone;
-  final List<String> blockersID;
-  final List<String> followingID;
-  final List<String> followersID;
-  final DateTime createTime;
-  final DateTime updateTime;
-  final DateTime lastSeen;
+       String? id;
+  String? userName;
+  String? email;
+  String? phone;
+  List<String>? blockersID;
+  List<String>? followingID;
+  List<String>? followersID;
+  DateTime? createTime;
+  DateTime? updateTime;
+  DateTime? lastSeen;
 
   User({
-    required this.id,
+           this.id,
     required this.userName,
     required this.email,
     required this.phone,
-    required this.blockersID,
-    required this.followingID,
-    required this.followersID,
-    required this.createTime,
-    required this.updateTime,
-    required this.lastSeen,
+        this.blockersID,
+        this.followingID,
+        this.followersID,
+        this.createTime,
+        this.updateTime,
+        this.lastSeen,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -47,9 +47,9 @@ class User {
       'blockersID': blockersID,
       'followingID': followingID,
       'followersID': followersID,
-      'createTime': createTime.toIso8601String(),
-      'updateTime': updateTime.toIso8601String(),
-      'lastSeen': lastSeen.toIso8601String(),
+      'createTime': createTime?.toIso8601String()??DateTime.now().toIso8601String(),
+      'updateTime': updateTime?.toIso8601String()??DateTime.now().toIso8601String(),
+      'lastSeen': lastSeen?.toIso8601String(),
     };
   }
 }
