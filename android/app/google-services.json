@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "60624325182",
+    "project_id": "hns23-50d59",
+    "storage_bucket": "hns23-50d59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60624325182:android:8317a55b29a964dd1e1f6f",
+        "android_client_info": {
+          "package_name": "com.example.hns_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKcC4HvXkmNSYGPwIAsot8Fh6lCuGLA-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
