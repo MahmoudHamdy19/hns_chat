@@ -1,5 +1,5 @@
 class User {
-       String? id;
+  String? id;
   String? userName;
   String? email;
   String? phone;
@@ -11,16 +11,16 @@ class User {
   DateTime? lastSeen;
 
   User({
-           this.id,
+    this.id,
     required this.userName,
     required this.email,
     required this.phone,
-        this.blockersID,
-        this.followingID,
-        this.followersID,
-        this.createTime,
-        this.updateTime,
-        this.lastSeen,
+    this.blockersID,
+    this.followingID,
+    this.followersID,
+    this.createTime,
+    this.updateTime,
+    this.lastSeen,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -47,8 +47,10 @@ class User {
       'blockersID': blockersID,
       'followingID': followingID,
       'followersID': followersID,
-      'createTime': createTime?.toIso8601String()??DateTime.now().toIso8601String(),
-      'updateTime': updateTime?.toIso8601String()??DateTime.now().toIso8601String(),
+      'createTime':
+          createTime?.toIso8601String() ?? DateTime.now().toIso8601String(),
+      'updateTime':
+          updateTime?.toIso8601String() ?? DateTime.now().toIso8601String(),
       'lastSeen': lastSeen?.toIso8601String(),
     };
   }

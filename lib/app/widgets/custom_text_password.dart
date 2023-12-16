@@ -12,12 +12,15 @@ class CustomTextPassword extends StatelessWidget{
   RxBool showPassword = true.obs  ;
   void Function(String)? onChanged;
   bool isPassword;
-  CustomTextPassword({required this.title,
+  String? Function(String?)? validator; // Updated to accept a validation function
+
+  CustomTextPassword({super.key, required this.title,
     this.controllerText,
     this.onChanged,
     this.keyboardType,
     this.isPassword = false,
-    this.validateMessage});
+    this.validateMessage,
+    this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +40,7 @@ class CustomTextPassword extends StatelessWidget{
             keyboardType:keyboardType,
             onChanged: onChanged,
             textInputAction: TextInputAction.next,
-            validator: (value) {
-              if(value!.isEmpty){
-                return validateMessage??'va_ms'.tr;
-              }
-            },
+           validator: validator,
             obscureText: isPassword &&showPassword.value,
             decoration: InputDecoration(
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),

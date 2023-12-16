@@ -8,12 +8,13 @@ class CustomTextForm extends StatelessWidget {
   String? validateMessage;
   TextInputType? keyboardType;
   void Function(String)? onChanged;
+  String? Function(String?)? validator; // Updated to accept a validation function
   CustomTextForm(
       {required this.title,
       this.controllerText,
       this.onChanged,
       this.keyboardType,
-      this.validateMessage});
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +33,7 @@ class CustomTextForm extends StatelessWidget {
           keyboardType: keyboardType,
           onChanged: onChanged,
           textInputAction: TextInputAction.next,
-          validator: (value) {
-            if (value!.isEmpty) {
-              return validateMessage ?? 'va_ms'.tr;
-            }
-          },
+          validator:validator,
           decoration: InputDecoration(
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
