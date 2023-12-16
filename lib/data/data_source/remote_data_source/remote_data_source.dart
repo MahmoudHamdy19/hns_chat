@@ -5,6 +5,8 @@ import 'package:hns_chat/data/models/user.dart';
 
 abstract class RemoteDataSource {
   Future<void> register(User user , String password);
+  Future<User?> login(String email , String password);
+
 }
 
 
@@ -21,6 +23,17 @@ class ImplRemoteDataSource implements RemoteDataSource {
         firestore.collection(FireStoreEndPoints.users).doc(value.id).update(user.toJson());
       });
     });
+  }
+
+  @override
+  Future<User?> login(String email, String password) async {
+    auth.signInWithEmailAndPassword(email: email, password: password).then((value) async{
+     var response= await firestore.collection(FireStoreEndPoints.users).doc(value.user!.uid).get();
+     User user= User.fromJson(response.data()!);
+     return user ;
+
+    });
+    return null ;
   }
 
 }
