@@ -3,18 +3,21 @@ import 'package:get/get.dart';
 import '../utils/theme/light_theme.dart';
 
 class CustomTextForm extends StatelessWidget {
+  String? Function(String?)? validator;
   String title;
+  String? labelText;
   TextEditingController? controllerText;
   String? validateMessage;
   TextInputType? keyboardType;
   void Function(String)? onChanged;
-  String? Function(String?)? validator; // Updated to accept a validation function
   CustomTextForm(
       {required this.title,
       this.controllerText,
       this.onChanged,
       this.keyboardType,
-      this.validator});
+      this.validateMessage,
+      this.validator,
+      this.labelText});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +35,10 @@ class CustomTextForm extends StatelessWidget {
         TextFormField(
           keyboardType: keyboardType,
           onChanged: onChanged,
+          validator: validator,
           textInputAction: TextInputAction.next,
-          validator:validator,
           decoration: InputDecoration(
+            labelText:labelText?.tr,
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
           ),
