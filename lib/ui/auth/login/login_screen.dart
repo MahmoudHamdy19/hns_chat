@@ -29,31 +29,36 @@ final GlobalKey<FormState> _key =GlobalKey<FormState>();
   _Body(){
     return Form(
       key: _key,
-      child: Column(
-        children: [
-          CustomTextForm(
-            title: 'Email',
-            labelText: 'Email',
-            onChanged: (p0) {
+      child: Center(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              CustomTextForm(
+                title: 'Email',
+                labelText: 'Email',
+                onChanged: (p0) {
 
-            },
-            validator:(value) => emailValidate(value),
+                },
+                validator:(value) => emailValidate(value),
+              ),
+              CustomTextPassword(title: 'Password',
+                labelText: 'Password',
+                onChanged: (p0) {
+
+                },),
+              CustomBtn(onPressed: () {
+                if (_key.currentState!.validate()) {
+                  controller.login();
+
+                }
+              }, title: 'Login'),
+              TextButton(onPressed: () {
+                Get.toNamed(AppRoutes.registerScreen);
+              }, child: const Text('I don\'t have an Account'))
+            ],
           ),
-          CustomTextPassword(title: 'Password',
-            labelText: 'Password',
-            onChanged: (p0) {
-
-            },),
-          CustomBtn(onPressed: () {
-            if (_key.currentState!.validate()) {
-              controller.login();
-
-            }
-          }, title: 'Login'),
-          TextButton(onPressed: () {
-            Get.toNamed(AppRoutes.registerScreen);
-          }, child: const Text('I don\'t have an Account'))
-        ],
+        ),
       ),
     );
   }
