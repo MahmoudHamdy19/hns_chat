@@ -8,7 +8,9 @@ abstract class RemoteDataSource {
   Future<User?> login(String email, String password);
   Future<void> forgetPassword(String email);
   Future<List<User>?> getUsers();
-  Future<List<User?>>  getUserInfo();
+  Future<User?> getUserInfo();
+  Future<bool> checkLogin();
+  Future<bool> logout();
 }
 
 class ImplRemoteDataSource implements RemoteDataSource {
@@ -60,13 +62,26 @@ class ImplRemoteDataSource implements RemoteDataSource {
   }
 
   @override
-  Future<List<User?>> getUserInfo() async{
-    return (await firestore.collection(FireStoreEndPoints.users).get())
-        .docs.where((element) => element.id==auth.currentUser?.uid).map((e) => User.fromJson(e.data())).toList();
+  Future<User?> getUserInfo() async{
+    if(auth.currentUser!=null){
+      return User.fromJson((await firestore.collection(FireStoreEndPoints.users).doc(auth.currentUser!.uid).get()).data()!);
+    }
+    return null;
   }
 
   @override
   Future<void> forgetPassword(String email) async {
     await auth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
+  Future<bool> checkLogin() async{
+   return auth.currentUser !=null ;
+  }
+
+  @override
+  Future<bool> logout() async{
+     auth.signOut();
+     return checkLogin();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:hns_chat/ui/auth/foreget_password/binding/forget_password_binding.dart';
 import 'package:hns_chat/ui/auth/foreget_password/forget_password.dart';
@@ -38,6 +39,7 @@ class AppRoutes {
     GetPage(name: homeScreen,
       bindings: [
         HomeBinding(),
+        ProfileBinding()
       ],
       page: () => const HomeScreen(),),
     GetPage(name: profileScreen,

@@ -9,6 +9,7 @@ class LogInController extends GetxController{
   User? user  ;
   String?  password ;
   String?  email ;
+
   login()async{
     loading.value=true;
     dataSource.login(email!, password!).then((value) {
@@ -18,4 +19,20 @@ class LogInController extends GetxController{
       Get.offAndToNamed(AppRoutes.homeScreen,);
     });
   }
+
+  checkLogin(){
+    dataSource.checkLogin().then((value){
+      if(value){
+        Get.offAndToNamed(AppRoutes.homeScreen);
+      }
+    });
+  }
+
+
+  @override
+  void onInit() {
+    checkLogin();
+    super.onInit();
+  }
+
 }
