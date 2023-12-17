@@ -6,6 +6,7 @@ import 'package:hns_chat/data/models/user.dart';
 abstract class RemoteDataSource {
   Future<void> register(User user, String password);
   Future<User?> login(String email, String password);
+  Future<void> forgetPassword(String email);
   Future<List<User>?> getUsers();
 }
 
@@ -55,5 +56,10 @@ class ImplRemoteDataSource implements RemoteDataSource {
         .docs.where((element) => element.id!=auth.currentUser?.uid)
         .map((e) => User.fromJson(e.data()))
         .toList();
+  }
+
+  @override
+  Future<void> forgetPassword(String email) async {
+    await auth.sendPasswordResetEmail(email: email);
   }
 }

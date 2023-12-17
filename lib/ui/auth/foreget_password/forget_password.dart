@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hns_chat/app/utils/routes/app_routes.dart';
-import 'package:hns_chat/app/widgets/costum_text_form.dart';
-import 'package:hns_chat/app/widgets/custom_text_password.dart';
-import 'package:hns_chat/ui/auth/login/controller/login_controller.dart';
+import 'package:hns_chat/ui/auth/foreget_password/controler/forget_password_controller.dart';
 
 import '../../../app/utils/constants/constant.dart';
+import '../../../app/utils/routes/app_routes.dart';
 import '../../../app/utils/theme/light_theme.dart';
+import '../../../app/widgets/costum_text_form.dart';
 import '../../../app/widgets/custom_btn.dart';
 
-class LoginScreen extends GetWidget<LogInController> {
+class ForgetPasswordScreen extends GetWidget<ForgetPasswordController> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  LoginScreen({super.key});
+  ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class LoginScreen extends GetWidget<LogInController> {
       return Scaffold(
           appBar: AppBar(
             title: Text(
-              'Login',
+              'Forget Password',
               style: appBarTitleStyle,
             ),
           ),
@@ -48,42 +47,19 @@ class LoginScreen extends GetWidget<LogInController> {
                 },
                 validator: (value) => validateEmail(value),
               ),
-              CustomTextPassword(
-                title: 'Password',
-                labelText: 'Password',
-                onChanged: (p0) {
-                  controller.password = p0;
-                },
-                noValidate: true,
-              ),
-              Container(
-                alignment: Alignment.centerRight,
-                child: SizedBox(
-                  child: TextButton(
-                      onPressed: () {
-                        Get.toNamed(AppRoutes.forgetPasswordScreen);
-                      },
-                      child: const Text('Forget Password')),
-                ),
-              ),
               const SizedBox(
                 height: 20.0,
               ),
               CustomBtn(
                   onPressed: () {
                     if (_key.currentState!.validate()) {
-                      controller.login();
+                      controller.forgetPassword();
                     }
                   },
-                  title: 'Login'),
+                  title: 'Forget Password'),
               const SizedBox(
                 height: 20.0,
               ),
-              TextButton(
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.registerScreen);
-                  },
-                  child: const Text('I don\'t have an Account'))
             ],
           ),
         ),

@@ -1,4 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:hns_chat/ui/auth/foreget_password/binding/forget_password_binding.dart';
+import 'package:hns_chat/ui/auth/foreget_password/forget_password.dart';
 import 'package:hns_chat/ui/auth/login/binding/login_binding.dart';
 import 'package:hns_chat/ui/auth/login/login_screen.dart';
 import 'package:hns_chat/ui/auth/register/binding/register_binding.dart';
@@ -12,6 +14,7 @@ class AppRoutes {
   static String registerScreen = '/register' ;
   static String loginScreen = '/login' ;
   static String homeScreen = '/home' ;
+  static String forgetPasswordScreen = '/forgetPassword' ;
   static List<GetPage> pages = [
     GetPage(name: registerScreen,
         bindings: [
@@ -23,6 +26,11 @@ class AppRoutes {
         LogInBinding(),
       ],
       page: () => LoginScreen(),),
+    GetPage(name: forgetPasswordScreen,
+      bindings: [
+        ForgetPasswordBinding(),
+      ],
+      page: () => ForgetPasswordScreen(),),
     GetPage(name: homeScreen,
       bindings: [
         HomeBinding(),
