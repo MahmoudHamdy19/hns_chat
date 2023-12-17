@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hns_chat/app/utils/routes/app_routes.dart';
 import 'package:hns_chat/app/utils/theme/light_theme.dart';
 import 'package:hns_chat/app/widgets/user_chat_card.dart';
 import 'package:hns_chat/ui/home/controller/home_controller.dart';
@@ -9,7 +10,16 @@ class HomeScreen extends GetWidget<HomeController>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:Text('Chats',style: appBarTitleStyle,)),
+      appBar: AppBar(
+          title:Text('Chats',style: appBarTitleStyle,),
+        actions: [
+          IconButton(onPressed: () {
+            Get.toNamed(AppRoutes.profileScreen);
+          },
+              icon:const Icon(Icons.person))
+        ],
+
+      ),
       body:Obx(
         () {
           return ListView.separated(

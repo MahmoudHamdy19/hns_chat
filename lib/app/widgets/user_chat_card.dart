@@ -10,16 +10,40 @@ class UserChatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return   Row(
       children: [
+        const Stack(
+          children: [
+            CircleAvatar(
+              radius: 40.0,
+              backgroundImage: NetworkImage(
+                  'https://img.freepik.com/free-photo/profile-shot-aristocratic-girl-blouse-with-frill-lady-with-flowers-her-hair-posing-proudly-against-blue-wall_197531-14304.jpg?w=360&t=st=1702768960~exp=1702769560~hmac=3547cddeb1422e7ca87778f41fa14fa592cb66b81de826aa5c9163f88dd3090a'),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: CircleAvatar(
+                radius: 9.0,
+                backgroundColor: Colors.green,
+              ),
+            ),
+          ],
+        ),
+
+        /*
         const CircleAvatar(
           radius: 40.0,
           backgroundImage: NetworkImage('https://img.freepik.com/free-photo/profile-shot-aristocratic-girl-blouse-with-frill-lady-with-flowers-her-hair-posing-proudly-against-blue-wall_197531-14304.jpg?w=360&t=st=1702768960~exp=1702769560~hmac=3547cddeb1422e7ca87778f41fa14fa592cb66b81de826aa5c9163f88dd3090a'),
-        ),
+        ),*/
         const SizedBox(width: 10.0,) ,
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(user.userName.toString(),style: headChatTextStyle,),
+              Row(
+                children: [
+            Expanded(child: Text(user.userName.toString(),style: headChatTextStyle,overflow: TextOverflow.ellipsis)),
+              const Icon(Icons.more_horiz)
+                ],
+              ),
               Row(
                 children: [
                   Expanded(child: Text('Hallo!',overflow: TextOverflow.ellipsis,style: subheadChatTextStyle,)),

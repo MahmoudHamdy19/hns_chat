@@ -7,6 +7,7 @@ abstract class RemoteDataSource {
   Future<void> register(User user, String password);
   Future<User?> login(String email, String password);
   Future<List<User>?> getUsers();
+  Future<List<User?>>  getUserInfo();
 }
 
 class ImplRemoteDataSource implements RemoteDataSource {
@@ -55,5 +56,11 @@ class ImplRemoteDataSource implements RemoteDataSource {
         .docs.where((element) => element.id!=auth.currentUser?.uid)
         .map((e) => User.fromJson(e.data()))
         .toList();
+  }
+
+  @override
+  Future<List<User?>> getUserInfo() async{
+    return (await firestore.collection(FireStoreEndPoints.users).get())
+        .docs.where((element) => element.id==auth.currentUser?.uid).map((e) => User.fromJson(e.data())).toList();
   }
 }

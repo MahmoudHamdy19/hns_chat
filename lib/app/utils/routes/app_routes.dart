@@ -5,6 +5,9 @@ import 'package:hns_chat/ui/auth/register/binding/register_binding.dart';
 import 'package:hns_chat/ui/auth/register/regiser_screen.dart';
 import 'package:hns_chat/ui/home/binding/home_binding.dart';
 import 'package:hns_chat/ui/home/home_screen.dart';
+import 'package:hns_chat/ui/profile/binding/profile_binding.dart';
+import 'package:hns_chat/ui/profile/profile_screen.dart';
+
 
 class AppRoutes {
 
@@ -12,6 +15,7 @@ class AppRoutes {
   static String registerScreen = '/register' ;
   static String loginScreen = '/login' ;
   static String homeScreen = '/home' ;
+  static String profileScreen = '/profile' ;
   static List<GetPage> pages = [
     GetPage(name: registerScreen,
         bindings: [
@@ -28,6 +32,11 @@ class AppRoutes {
         HomeBinding(),
       ],
       page: () => const HomeScreen(),),
+    GetPage(name: profileScreen,
+      bindings: [
+        ProfileBinding(),
+      ],
+      page: () => const ProfileScreen(),),
 
   ];
 

@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       locale:const Locale('en','Us'),
       getPages:AppRoutes.pages,
       initialBinding: InitBinding(),
-      initialRoute: AppRoutes.loginScreen,
+      initialRoute: AppRoutes.homeScreen,
     );
   }
 }
