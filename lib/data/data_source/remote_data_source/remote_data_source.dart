@@ -4,36 +4,56 @@ import 'package:hns_chat/app/utils/constants/constant.dart';
 import 'package:hns_chat/data/models/user.dart';
 
 abstract class RemoteDataSource {
-  Future<void> register(User user , String password);
-  Future<User?> login(String email , String password);
-
+  Future<void> register(User user, String password);
+  Future<User?> login(String email, String password);
+  Future<List<User>?> getUsers();
 }
 
-
 class ImplRemoteDataSource implements RemoteDataSource {
+  auths.FirebaseAuth auth;
+  FirebaseFirestore firestore;
 
-  auths.FirebaseAuth auth ;
-  FirebaseFirestore firestore ;
-  ImplRemoteDataSource({required this.auth,required this.firestore});
+  ImplRemoteDataSource({required this.auth, required this.firestore});
+
   @override
   Future<void> register(User user, String password) async {
-   await auth.createUserWithEmailAndPassword(email: user.email!, password: password).then((value){
-      firestore.collection(FireStoreEndPoints.users).add(user.toJson()).then((value){
-        user.id = value.id;
-        firestore.collection(FireStoreEndPoints.users).doc(value.id).update(user.toJson());
-      });
+    await auth
+        .createUserWithEmailAndPassword(email: user.email!, password: password)
+        .then((registerData) {
+      user.id = registerData.user!.uid;
+      firestore
+          .collection(FireStoreEndPoints.users)
+          .doc(registerData.user!.uid)
+          .set(user.toJson())
+          .then((value) {});
     });
   }
 
   @override
   Future<User?> login(String email, String password) async {
-    auth.signInWithEmailAndPassword(email: email, password: password).then((value) async{
-     var response= await firestore.collection(FireStoreEndPoints.users).doc(value.user!.uid).get();
-     User user= User.fromJson(response.data()!);
-     return user ;
-
+    User? user;
+    await auth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((value) async {
+      await firestore
+          .collection(FireStoreEndPoints.users)
+          .doc(value.user!.uid)
+          .get()
+          .then((response) {
+        user = User.fromJson(response.data()!);
+        return user;
+      }).catchError((error) {
+        print(error.toString());
+      });
     });
-    return null ;
+    return user;
   }
 
+  @override
+  Future<List<User>?> getUsers() async {
+    return (await firestore.collection(FireStoreEndPoints.users).get())
+        .docs.where((element) => element.id!=auth.currentUser?.uid)
+        .map((e) => User.fromJson(e.data()))
+        .toList();
+  }
 }

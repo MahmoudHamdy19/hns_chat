@@ -15,3 +15,17 @@ TextStyle  butTextStyle =const TextStyle(
   fontSize: 20.0,
   color: Colors.white,
 ) ;
+
+TextStyle  headChatTextStyle =const TextStyle(
+  fontWeight: FontWeight.bold ,
+  fontSize: 18.0,
+  color: Colors.black
+ ) ;
+TextStyle  subheadChatTextStyle =const TextStyle(
+   fontSize: 16.0,
+    color: Colors.black
+ ) ;
+TextStyle  subheadDateChatTextStyle =const TextStyle(
+    fontSize: 12.0,
+    color: Colors.grey
+) ;

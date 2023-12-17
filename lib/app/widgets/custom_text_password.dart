@@ -13,13 +13,15 @@ class CustomTextPassword extends StatelessWidget{
   RxBool showPassword = true.obs  ;
   void Function(String)? onChanged;
   bool isPassword;
+  bool noValidate ;
   CustomTextPassword({required this.title,
     this.controllerText,
     this.onChanged,
     this.keyboardType,
     this.isPassword = false,
     this.validateMessage,
-    this.labelText
+    this.labelText,
+    this.noValidate = false
   }
 
 );
@@ -42,7 +44,7 @@ class CustomTextPassword extends StatelessWidget{
             keyboardType:keyboardType,
             onChanged: onChanged,
             textInputAction: TextInputAction.next,
-            validator: (value) {
+            validator:noValidate? null:(value) {
 
               if(value!.isEmpty){
                 return validateMessage??'va_empty_Password'.tr;

@@ -29,12 +29,12 @@ class User {
       userName: json['userName'],
       email: json['email'],
       phone: json['phone'],
-      blockersID: List<String>.from(json['blockersID']),
-      followingID: List<String>.from(json['followingID']),
-      followersID: List<String>.from(json['followersID']),
+      blockersID: List<String>.from(json['blockersID']??[]),
+      followingID: List<String>.from(json['followingID']??[]),
+      followersID: List<String>.from(json['followersID']??[]),
       createTime: DateTime.parse(json['createTime']),
       updateTime: DateTime.parse(json['updateTime']),
-      lastSeen: DateTime.parse(json['lastSeen']),
+      lastSeen: DateTime.parse(json['lastSeen']??DateTime.now().toIso8601String()),
     );
   }
 

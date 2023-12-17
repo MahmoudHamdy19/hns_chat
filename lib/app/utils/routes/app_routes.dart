@@ -3,12 +3,15 @@ import 'package:hns_chat/ui/auth/login/binding/login_binding.dart';
 import 'package:hns_chat/ui/auth/login/login_screen.dart';
 import 'package:hns_chat/ui/auth/register/binding/register_binding.dart';
 import 'package:hns_chat/ui/auth/register/regiser_screen.dart';
+import 'package:hns_chat/ui/home/binding/home_binding.dart';
+import 'package:hns_chat/ui/home/home_screen.dart';
 
 class AppRoutes {
 
   static String initRoute = '/' ;
   static String registerScreen = '/register' ;
   static String loginScreen = '/login' ;
+  static String homeScreen = '/home' ;
   static List<GetPage> pages = [
     GetPage(name: registerScreen,
         bindings: [
@@ -19,7 +22,12 @@ class AppRoutes {
       bindings: [
         LogInBinding(),
       ],
-      page: () => LoginScreen(),)
+      page: () => LoginScreen(),),
+    GetPage(name: homeScreen,
+      bindings: [
+        HomeBinding(),
+      ],
+      page: () => const HomeScreen(),),
 
   ];
 

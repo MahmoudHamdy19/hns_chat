@@ -43,19 +43,10 @@ class RegisterScreen extends GetWidget<RegisterController> {
               title: 'User Name',
               labelText:'User Name',
               validator: (value){
-                if (value!.isEmpty) {
-                  return 'va_empty_userName'.tr;
-                }
-
-                // Check if the username contains only letters, numbers, and underscores
-                if (!RegExp(r'^[a-zA-Z0-9_]+$').hasMatch(value)) {
-                  return 'va_ms_userName'.tr;
-                }
-
-                return null;
+               validateUsername(value);
               },
               onChanged: (value) {
-                controller.user?.userName = value;
+                controller.user.userName = value;
               },
             ),
             CustomTextForm(
@@ -63,10 +54,10 @@ class RegisterScreen extends GetWidget<RegisterController> {
               labelText:'Email' ,
               keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  emailValidate(value);
+                 validateEmail(value);
                 },
               onChanged: (p0) {
-                controller.user?.email = p0;
+                controller.user.email = p0;
               },
             ),
             CustomTextForm(
@@ -74,7 +65,8 @@ class RegisterScreen extends GetWidget<RegisterController> {
                 labelText:'Phone' ,
                 keyboardType: TextInputType.phone,
                 validator: (value) {
-                  String? numericValue = value?.replaceAll(RegExp(r'[^0-9]'), '');
+                  validatePhoneNumber(value);
+               /*   String? numericValue = value?.replaceAll(RegExp(r'[^0-9]'), '');
                   if (value!.isEmpty) {
                     return  'va_empty_phone'.tr;
                   }
@@ -87,10 +79,10 @@ class RegisterScreen extends GetWidget<RegisterController> {
                   if (!hasAllowedPrefix) {
                     return 'va_ms_phone2'.tr;
                   }
-                  return null;
+                  return null;*/
                 },
                 onChanged: (p0) {
-                  controller.user?.phone = p0;
+                  controller.user.phone = p0;
                 }),
             CustomTextPassword(
                 title: 'Password',
@@ -106,7 +98,6 @@ class RegisterScreen extends GetWidget<RegisterController> {
             CustomBtn(onPressed: () {
               if (_key.currentState!.validate()) {
                 controller.register();
-
               }
             }, title: 'Register')
 

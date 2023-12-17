@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false,
       translations: AppLanguage(),
       locale:const Locale('en','Us'),
       getPages:AppRoutes.pages,
