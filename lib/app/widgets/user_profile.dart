@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hns_chat/ui/profile/controller/profile_controller.dart';
 import '../utils/theme/light_theme.dart';
+import 'package:image_picker/image_picker.dart';
 class UserProfile extends GetWidget<ProfileController>{
    UserProfile({super.key,});
 
@@ -21,6 +22,16 @@ class UserProfile extends GetWidget<ProfileController>{
                     'https://img.freepik.com/free-photo/profile-shot-aristocratic-girl-blouse-with-frill-lady-with-flowers-her-hair-posing-proudly-against-blue-wall_197531-14304.jpg?w=360&t=st=1702768960~exp=1702769560~hmac=3547cddeb1422e7ca87778f41fa14fa592cb66b81de826aa5c9163f88dd3090a'),
               ),
               const SizedBox(height: 30.0,),
+              IconButton(
+                icon: const Icon(
+                  Icons.camera,
+                  size: 24.0,
+                  color: Colors.deepOrange,
+                ),
+                onPressed: () {
+                  _pickImage();
+                },
+              ),
               Row(
                 children: [
                   Text('Name :',style:  headChatTextStyle,),
@@ -85,4 +96,16 @@ class UserProfile extends GetWidget<ProfileController>{
       ),
     );
   }
+   Future<void> _pickImage() async {
+     final picker = ImagePicker();
+     final pickedFile = (await picker.pickImage(source: ImageSource.gallery)) ;
+
+     if (pickedFile != null) {
+       // Handle the picked image file (e.g., display it in an Image widget)
+       await (controller.uploadImageToFirebase(pickedFile as PickedFile));
+
+     } else {
+       print('No image picked.');
+     }
+   }
 }
